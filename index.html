@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome Page</title>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: radial-gradient(circle at top, #ff9a9e, #fad0c4, #a1c4fd);
+    background-size: 200% 200%;
+    animation: bgMove 12s infinite alternate;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    color: white;
+    text-align: center;
+  }
+
+  @keyframes bgMove {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+
+  .star {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: twinkle 3s infinite ease-in-out;
+  }
+
+  @keyframes twinkle {
+    0%,100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(2); }
+  }
+
+  h1 {
+    margin-top: 40px;
+    font-size: 3.5rem;
+    text-shadow: 0 0 20px #ff0057, 0 0 40px #00eaff;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 20px #ff0077; }
+    to { text-shadow: 0 0 45px #00ffaa; }
+  }
+
+  .moving-quote {
+    margin-top: 10px;
+    font-size: 1.4rem;
+    opacity: 0.9;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .moving-quote span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: moveQuote 25s linear infinite, neonPulse 3s infinite alternate;
+    font-weight:700;
+    font-size:1.3rem;
+    color:#fff;
+  }
+
+  @keyframes moveQuote {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-150%); }
+  }
+
+  @keyframes neonPulse {
+    0% { text-shadow:0 0 8px #ff00ff, 0 0 18px #00eaff, 0 0 28px #ffdd00; color:#ff7afc; }
+    50% { text-shadow:0 0 10px #00eaff, 0 0 22px #8fff00, 0 0 34px #ff00ff; color:#7dfbff; }
+    100% { text-shadow:0 0 12px #ffdd00, 0 0 26px #ff4d4d, 0 0 40px #8fff00; color:#ffff90; }
+  }
+
+  .gallery {
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    padding-bottom: 60px;
+  }
+
+  .photo-card {
+    width: 260px;
+    height: 340px;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    border: 3px solid rgba(255,255,255,0.4);
+    transition: 0.4s;
+    box-shadow: 0 0 25px rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.15);
+  }
+
+  .photo-card:hover {
+    transform: scale(1.15) rotate(2deg);
+    border: 3px solid #fff;
+    box-shadow: 0 0 25px #fff, 0 0 40px #ff00dd, 0 0 70px #00ffd5;
+  }
+
+  .photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s;
+  }
+
+  .photo-card:hover img {
+    transform: scale(1.2);
+    filter: brightness(1.3) contrast(1.1);
+  }
+
+  .fade {
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (max-width: 480px) {
+  .photo-card {
+    width: 80vw;
+    height: 55vh;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .moving-quote span {
+    font-size: 1rem;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<h1 class="fade">🎉 Happy Birthday to you Nisharaaaaaaa❤️ </h1>
+
+<div class="moving-quote fade">
+  <span>✨ "May this birthday journey begin with magic, smiles, and endless happiness!" ✨</span>
+</div>
+
+<div class="gallery fade">
+  <div class="photo-card" onclick="goTo('wish1.html')"><img src="1.jpg"></div>
+  <div class="photo-card" onclick="goTo('wish2.html')"><img src="2.jpg"></div>
+  <div class="photo-card" onclick="goTo('wish3.html')"><img src="3.jpg"></div>
+  <div class="photo-card" onclick="goTo('wish4.html')"><img src="4.jpg"></div>
+  <div class="photo-card" onclick="goTo('wish5.html')"><img src="5.jpg"></div>
+</div>
+
+<!-- 🔊 Play Music on First Touch -->
+<audio id="bgm2" loop>
+  <source src="Index.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Start music ONLY when user touches/clicks anywhere
+const audio = document.getElementById("bgm2");
+
+function enableMusic() {
+  audio.play().catch(() => {});
+  audio.muted = false;
+
+  // remove listener so it doesn't trigger again
+  document.removeEventListener("click", enableMusic);
+  document.removeEventListener("touchstart", enableMusic);
+}
+
+// Listeners for both PC click + mobile tap
+document.addEventListener("click", enableMusic);
+document.addEventListener("touchstart", enableMusic);
+
+
+// Floating stars effect
+for (let i = 0; i < 60; i++) {
+  let s = document.createElement('div');
+  s.className = 'star';
+  s.style.left = Math.random() * 100 + 'vw';
+  s.style.top = Math.random() * 100 + 'vh';
+  s.style.animationDuration = (1 + Math.random() * 3) + 's';
+  s.style.opacity = Math.random();
+  document.body.appendChild(s);
+}
+
+function goTo(page) {
+   window.location.href = page;
+}
+</script>
+
+</body>
+</html>

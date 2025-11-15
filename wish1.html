@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Wish 1 — Romantic Elegant</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#ffd6e8 0%, #ffeacd 40%, #fbe4ff 100%);
+    color:#2b0d1a;
+    overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    padding:30px;
+  }
+  .card{
+    width:920px;max-width:96vw;border-radius:20px;padding:28px;background:rgba(255,255,255,0.65);
+    box-shadow:0 20px 60px rgba(200,100,140,0.12);backdrop-filter: blur(6px);
+    position:relative;overflow:hidden;
+  }
+  h1{font-size:2.4rem;color:#7a1b3a;text-align:center;text-shadow:0 6px 24px rgba(255,200,220,0.6)}
+  .row{display:flex;gap:24px;margin-top:18px;flex-wrap:wrap;align-items:center;justify-content:center}
+  .photo{width:360px;height:480px;border-radius:16px;overflow:hidden;border:6px solid rgba(255,255,255,0.6);box-shadow:0 18px 40px rgba(122,27,58,0.12)}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s}
+  .photo:hover img{transform:scale(1.06)}
+  .text{max-width:460px}
+  p.lead{font-size:1.05rem;line-height:1.6;color:#4c2840;margin-bottom:14px}
+  .quote{display:inline-block;padding:10px 16px;border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,0.85),rgba(255,240,245,0.85));font-weight:600;animation:floaty 8s ease-in-out infinite}
+  @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+  .heart, .butter{position:fixed;pointer-events:none;will-change:transform,opacity}
+  .butter{width:26px;height:26px;background:conic-gradient(#ffb3d9,#ff7eb6);border-radius:6px;transform:rotate(15deg)}
+  .heart{width:18px;height:18px;background:linear-gradient(45deg,#ff6b9f,#ffb3d1);transform:rotate(45deg);border-radius:4px 4px 0 0}
+
+  @media (max-width: 480px) {
+  .photo-card {
+    width: 80vw;
+    height: 55vh;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .moving-quote span {
+    font-size: 1rem;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>💖 Wishing You the Most Beautiful Birthday</h1>
+
+  <div class="row">
+    <div class="photo"><img src="wish1.jpg" alt="photo1" onerror="this.style.filter='grayscale(40%)'"></div>
+
+    <div class="text">
+      <p class="lead">May your day be filled with warm moments, tender surprises, and endless love. Let these little butterflies and hearts carry my wishes to you.</p>
+
+      <div class="quote">"Every heartbeat is a wish — may they all come true." ✨</div>
+    </div>
+  </div>
+</div>
+
+<!-- Auto-play music -->
+<audio id="bgm" autoplay loop>
+  <source src="wish1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const colors = ['#ffb3d9','#ff7eb6','#ffd6e8','#ffd1b3'];
+
+// floating hearts & butterflies
+for(let i=0;i<18;i++){
+  const el = document.createElement(Math.random()>0.5?'div':'div');
+  el.className = (i%2? 'butter' : 'heart');
+  el.style.left = Math.random()*100 + 'vw';
+  el.style.top = 80 + Math.random()*20 + 'vh';
+  el.style.opacity = 0.9;
+  document.body.appendChild(el);
+
+  const dur = 6 + Math.random()*6;
+  el.animate([
+    {transform:'translateY(0) rotate(0deg)', opacity:1},
+    {transform:`translateY(-${140+Math.random()*40}vh) rotate(${Math.random()*720}deg)`, opacity:0}
+  ], {
+    duration: dur*1000,
+    delay: Math.random()*1500,
+    easing:'cubic-bezier(.2,.8,.2,1)',
+    iterations: Infinity
+  });
+}
+
+// Auto play music with fallback for browsers blocking autoplay
+const bgm = document.getElementById("bgm");
+document.addEventListener("click", () => {
+  if (bgm.paused) bgm.play().catch(()=>{});
+}, { once: true });
+</script>
+
+</body>
+</html>

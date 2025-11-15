@@ -1,0 +1,134 @@
+<!-- Save as wish3.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Wish 3 — Cute Pastel</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(180deg,#fff7ff 0%,#e9f7ff 60%);
+    color:#2b2b33;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;position:relative;
+  }
+  .card{
+    width:880px;max-width:96vw;
+    background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.8));
+    padding:26px;border-radius:18px;
+    box-shadow:0 20px 60px rgba(180,180,220,0.12);
+    position:relative;z-index:10;
+  }
+  h1{text-align:center;color:#6b2b6b;font-size:2.4rem;text-shadow:0 6px 18px rgba(255,255,255,0.7)}
+  .content{display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:14px}
+  .photo{width:340px;height:460px;border-radius:16px;overflow:hidden;border:4px solid rgba(255,255,255,0.6)}
+  .photo img{width:100%;height:100%;object-fit:cover}
+  .text{max-width:480px}
+  p.lead{font-size:1.05rem;color:#3b2b45;line-height:1.6}
+  .quote{
+    display:inline-block;padding:10px 14px;
+    border-radius:999px;background:linear-gradient(90deg,#fff0ff,#f0fff9);
+    font-weight:600;box-shadow:0 8px 20px rgba(100,100,140,0.06)
+  }
+  .cloud{position:fixed;width:120px;height:60px;background:linear-gradient(180deg,#fff,#fff8);border-radius:60px;opacity:0.9;filter:blur(.2px)}
+  button{
+    margin-top:12px;border:0;padding:10px 12px;
+    border-radius:12px;background:#ff9bd6;color:#fff;cursor:pointer
+  }
+
+  /* ❤️ HEART STYLE */
+  .heart{
+    position:fixed;
+    font-size:30px;
+    pointer-events:none;
+    animation: float 6s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) scale(1); opacity:1; }
+    100% { transform: translateY(-110vh) scale(1.8); opacity:0; }
+  }
+
+  @media (max-width: 480px) {
+  .photo-card {
+    width: 80vw;
+    height: 55vh;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .moving-quote span {
+    font-size: 1rem;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>☁️ Soft & Pastel Birthday Wishes</h1>
+  <div class="content">
+    <div class="photo"><img src="wish3.jpg" alt="photo3" onerror="this.style.filter='grayscale(30%)'"></div>
+    <div class="text">
+      <p class="lead">Sending you clouds of smiles, skies of pastel dreams, and a pocketful of starry wishes. Hope today is as sweet as candy and as calm as a soft breeze.</p>
+      <div class="quote">"Little moments, pastel memories — happiest birthday!" ✨</div>
+
+      <!-- Go Back Button (NOT REMOVED) -->
+      <div style="margin-top:12px">
+        <button onclick="history.back()">⬅ Go Back</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 🎵 Auto Play Music -->
+<audio id="bgm" src="wish3.mp3" autoplay loop></audio>
+
+<script>
+ // drifting clouds (existing)
+ for(let i=0;i<6;i++){
+   const c=document.createElement('div'); 
+   c.className='cloud';
+   c.style.left=(i*18+Math.random()*6)+'vw'; 
+   c.style.top=(6+Math.random()*10)+'vh';
+   c.style.opacity=0.9; 
+   c.style.transform='scale('+(0.9+Math.random()*0.6)+')';
+   document.body.appendChild(c);
+   const dur=18+Math.random()*20;
+   c.animate([
+     {transform:c.style.transform+' translateX(0)'},
+     {transform:c.style.transform+` translateX(${Math.random()*-120 - 60}vw)`}
+   ],{
+     duration:dur*1000,
+     delay:Math.random()*8000,
+     iterations:Infinity
+   });
+ }
+
+ // ❤️ Floating Hearts Everywhere
+ function createHeart(){
+   const heart=document.createElement('div');
+   heart.className='heart';
+   heart.textContent='❤️';
+   
+   heart.style.left=Math.random()*100+'vw';
+   heart.style.top='100vh';
+   heart.style.fontSize=(22+Math.random()*22)+'px';
+   heart.style.animationDuration=(4+Math.random()*4)+'s';
+
+   document.body.appendChild(heart);
+
+   setTimeout(()=>heart.remove(),8000);
+ }
+
+ setInterval(createHeart,500); // hearts every half-second
+</script>
+
+</body>
+</html>

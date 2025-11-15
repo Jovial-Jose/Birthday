@@ -1,0 +1,244 @@
+<!-- Save as wish5.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Wish 5 — Aesthetic Minimal</title>
+
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+
+  /* 🌈 Attractive Animated Gradient Background */
+  body{
+    font-family:'Poppins',sans-serif;
+    background: linear-gradient(135deg,#a8e6ff,#ffd6e8,#e3ffa8);
+    background-size: 400% 400%;
+    animation: bgAnim 15s ease infinite;
+    color:#223;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    overflow:hidden;
+    position:relative;
+  }
+
+  @keyframes bgAnim{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+
+  .card{
+    width:780px;max-width:95vw;
+    border-radius:18px;padding:28px;
+    background:rgba(255,255,255,0.9);
+    box-shadow:0 24px 60px rgba(34,50,80,0.06);
+    position:relative;z-index:10;
+  }
+
+  h1{text-align:center;font-size:2.2rem;color:#0b2545;margin-bottom:6px}
+
+  .row{display:flex;gap:20px;align-items:center;justify-content:center;flex-wrap:wrap}
+
+  .photo{
+    width:320px;height:440px;border-radius:16px;
+    overflow:hidden;border:2px solid rgba(10,40,80,0.04)
+  }
+
+  .photo img{width:100%;height:100%;object-fit:cover}
+
+  p.lead{max-width:380px;color:#1a2b45;line-height:1.6}
+
+  .quote{
+    margin-top:12px;color:#0b2545;
+    padding:10px 14px;border-radius:999px;
+    background:linear-gradient(90deg,rgba(16,50,90,0.05),rgba(255,255,255,0.85));
+    font-weight:600;display:inline-block
+  }
+
+  button{
+    margin-top:12px;border:0;padding:10px 12px;
+    border-radius:12px;background:#0b2545;color:#fff;
+    cursor:pointer
+  }
+
+  /* 🌸 Bubbles */
+  .bubble{
+    position:fixed;
+    border-radius:50%;
+    background:rgba(255,255,255,0.7);
+    box-shadow:0 0 18px rgba(255,255,255,0.9);
+    pointer-events:none;
+  }
+
+  /* ✨ Glitter particles */
+  .glitter{
+    position:fixed;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:white;
+    opacity:0.8;
+    filter:blur(1px);
+    pointer-events:none;
+  }
+
+  /* ❄ Soft Snow */
+  .snow{
+    position:fixed;
+    color:white;
+    font-size:12px;
+    opacity:0.9;
+    pointer-events:none;
+    filter:blur(0.5px);
+  }
+
+  /* 🌸 Sakura Petals */
+  .petal{
+    position:fixed;
+    width:18px;
+    height:18px;
+    background: pink;
+    border-radius: 50% 50% 60% 40%;
+    opacity:0.9;
+    pointer-events:none;
+    transform:rotate(20deg);
+  }
+
+  @media (max-width: 480px) {
+  .photo-card {
+    width: 80vw;
+    height: 55vh;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .moving-quote span {
+    font-size: 1rem;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🔊 Background Music -->
+<audio id="bgm" src="wish5.mp3" autoplay loop></audio>
+
+<div class="card">
+  <h1>✨ Simple & Aesthetic Wishes</h1>
+
+  <div class="row">
+    <div class="photo">
+      <img src="wish5.jpg" alt="photo5"
+           onerror="this.style.filter='grayscale(30%)'">
+    </div>
+
+    <div>
+      <p class="lead">
+        Less is more — a gentle wish for a gentle year. Quiet joy, calm growth,
+        and pockets of effortless happiness for you.
+      </p>
+
+      <div class="quote">"Soft days, bright moments — happy birthday." 🌿</div>
+
+      <div style="margin-top:12px">
+        <button onclick="history.back()">⬅ Go Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* 🌼 Floating bubbles */
+function createBubble() {
+  const b = document.createElement('div');
+  b.className = "bubble";
+  const size = 20 + Math.random()*60;
+  b.style.width = size + "px";
+  b.style.height = size + "px";
+  b.style.left = Math.random() * innerWidth + "px";
+  b.style.top = innerHeight + "px";
+  document.body.appendChild(b);
+
+  const endX = Math.random()*innerWidth;
+  b.animate([
+    { transform:"translateY(0)", opacity:1 },
+    { transform:`translate(${endX - parseFloat(b.style.left)}px, -120vh)`, opacity:0 }
+  ], { duration:6000+Math.random()*5000, easing:"ease-out", fill:"forwards" });
+
+  setTimeout(()=>b.remove(), 11000);
+}
+
+/* ✨ Glitter */
+function createGlitter(){
+  const g = document.createElement("div");
+  g.className = "glitter";
+  const size = 4 + Math.random()*4;
+  g.style.width = size+"px";
+  g.style.height = size+"px";
+  g.style.left = Math.random()*innerWidth + "px";
+  g.style.top = Math.random()*innerHeight + "px";
+  document.body.appendChild(g);
+
+  g.animate([
+    { opacity:1, transform:"scale(1)" },
+    { opacity:0, transform:"scale(0.2)" }
+  ], { duration:800+Math.random()*1500 });
+
+  setTimeout(()=> g.remove(), 2500);
+}
+
+/* ❄ Soft Snow Effect */
+function createSnow(){
+  const s = document.createElement("div");
+  s.className = "snow";
+  s.innerHTML = "❄";
+  s.style.left = Math.random()*innerWidth + "px";
+  s.style.top = "-20px";
+  const size = 12 + Math.random()*10;
+  s.style.fontSize = size + "px";
+
+  document.body.appendChild(s);
+
+  s.animate([
+    { transform:"translateY(0) rotate(0deg)" },
+    { transform:`translateY(110vh) rotate(${200+Math.random()*200}deg)` }
+  ], { duration:6000 + Math.random()*4000, easing:"linear" });
+
+  setTimeout(()=>s.remove(), 11000);
+}
+
+/* 🌸 Sakura Petals */
+function createPetal(){
+  const p = document.createElement("div");
+  p.className = "petal";
+  p.style.left = Math.random()*innerWidth + "px";
+  p.style.top = "-30px";
+
+  document.body.appendChild(p);
+
+  const fallX = Math.random()*100 - 50;
+
+  p.animate([
+    { transform:"translate(0,0) rotate(0deg)" },
+    { transform:`translate(${fallX}px, 110vh) rotate(${360+Math.random()*360}deg)` }
+  ], { duration:7000 + Math.random()*4000, easing:"ease-in" });
+
+  setTimeout(()=>p.remove(), 12000);
+}
+
+/* Timers */
+setInterval(createBubble, 300);
+setInterval(createGlitter, 120);
+setInterval(createSnow, 200);
+setInterval(createPetal, 400);
+</script>
+
+</body>
+</html>

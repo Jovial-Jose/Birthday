@@ -1,0 +1,96 @@
+<!-- Save as wish2.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Wish 2 — Neon Party</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Poppins',sans-serif;background:#05010a;color:#cfefff;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;padding:28px;
+  }
+  .wrap{width:940px;max-width:96vw;padding:26px;border-radius:14px;
+    background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+    box-shadow:0 30px 80px rgba(0,0,0,0.6);position:relative}
+  h1{text-align:center;font-size:2.4rem;color:#fff;text-shadow:0 0 24px #7ef0ff}
+  .panel{display:flex;gap:20px;align-items:center;justify-content:center;margin-top:18px;flex-wrap:wrap}
+  .photo{width:360px;height:480px;border-radius:14px;overflow:hidden;
+    border:2px solid rgba(126,240,255,0.12);box-shadow:0 0 40px rgba(126,240,255,0.08)}
+  .photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+  .photo:hover img{transform:scale(1.04)}
+  .text{max-width:480px}
+  p.lead{color:#e8faff;font-size:1.05rem;line-height:1.5}
+  .neon-quote{display:inline-block;padding:10px 16px;border-radius:999px;
+    background:rgba(255,255,255,0.02);
+    box-shadow:0 0 28px rgba(94,255,255,0.08),0 0 8px rgba(255,0,255,0.03);
+    font-weight:700;color:#caffff}
+  .dot{position:fixed;border-radius:50%;opacity:0.95;mix-blend-mode:screen}
+  .controls{margin-top:18px;display:flex;gap:12px}
+  button{border:0;padding:10px 12px;border-radius:10px;background:#04c4ff;color:#001;
+    cursor:pointer;font-weight:700}
+
+    @media (max-width: 480px) {
+  .photo-card {
+    width: 80vw;
+    height: 55vh;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .moving-quote span {
+    font-size: 1rem;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⚡ Neon Birthday Vibes ⚡</h1>
+  <div class="panel">
+    <div class="photo"><img src="wish2.jpg" alt="photo2" onerror="this.style.filter='grayscale(40%)'"></div>
+    <div class="text">
+      <p class="lead">Turn the lights down and the neon up — today is your day to shine bright like electric confetti. Dance loud and live bold.</p>
+      <div class="neon-quote">"Glow louder than the city lights." ✨</div>
+
+      <!-- Removed Play button → Only Back button remains -->
+      <div class="controls">
+        <button onclick="history.back()">⬅ Go Back</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Autoplay enabled (muted to bypass browser restriction) -->
+<audio id="bgm2" autoplay loop muted>
+  <source src="wish2.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const colors=['#7ef0ff','#ff5af0','#9bff7a','#ffd36e','#7a6bff'];
+for(let i=0;i<45;i++){
+  const d=document.createElement('div'); d.className='dot';
+  const size=4+Math.random()*18; d.style.width=size+'px'; d.style.height=size+'px';
+  d.style.left=Math.random()*100+'vw'; d.style.top=Math.random()*100+'vh';
+  d.style.background=colors[Math.floor(Math.random()*colors.length)]; d.style.opacity=0.85;
+  document.body.appendChild(d);
+  const dur=4+Math.random()*8;
+  d.animate(
+    [{transform:'translateY(0) scale(1)',opacity:1},
+     {transform:`translateY(${(-10-Math.random()*40)}vh) scale(.3)`,opacity:0}],
+    {duration:dur*1000,delay:Math.random()*1200,iterations:Infinity,direction:'alternate',easing:'ease-in-out'}
+  );
+}
+
+const bgm2=document.getElementById('bgm2');
+
+/* Unmute after autoplay starts */
+setTimeout(()=>{ bgm2.muted=false; }, 500);
+</script>
+</body>
+</html>
