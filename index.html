@@ -5,23 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Welcome Page</title>
 
-<script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=H7UrGhOr5bK1ZCuiOSR4WHzaB-zl6XrcJnXEIMlvyn3HOJ5EfSJOwx0fWdjlulYlNSmVm71pnDA08043_glCkQ" charset="UTF-8"></script>
-
-<!-- Confetti Library -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     background: radial-gradient(circle at top, #ff9a9e, #fad0c4, #a1c4fd);
     background-size: 200% 200%;
-    animation: bgMove 12s infinite alternate;
+    animation: bgMove 10s infinite alternate ease-in-out;
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
     color: white;
     text-align: center;
-    position: relative;
   }
 
   @keyframes bgMove {
@@ -29,89 +23,83 @@
     100% { background-position: 100% 100%; }
   }
 
-  .star {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.7;
-    animation: twinkle 3s infinite ease-in-out;
-  }
-
-  @keyframes twinkle {
-    0%,100% { opacity: 0.2; transform: scale(1); }
-    50% { opacity: 1; transform: scale(2); }
-  }
-
   h1 {
-    margin-top: 40px;
-    font-size: 3.5rem;
-    text-shadow: 0 0 20px #ff0057, 0 0 40px #00eaff;
-    animation: glow 2s ease-in-out infinite alternate;
+    margin-top: 35px;
+    font-size: 3rem;
+    text-shadow: 0 0 15px #ff0057, 0 0 25px #00eaff;
+    animation: glow 1.8s infinite alternate;
   }
 
   @keyframes glow {
-    from { text-shadow: 0 0 20px #ff0077; }
-    to { text-shadow: 0 0 45px #00ffaa; }
+    0% { text-shadow: 0 0 15px #ff0077; }
+    100% { text-shadow: 0 0 35px #00ffaa; }
   }
 
+  /* Reduced stars for performance */
+  .star {
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: twinkle 2.5s infinite ease-in-out alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.7); }
+  }
+
+  /* Moving Quote */
   .moving-quote {
-    margin-top: 10px;
-    font-size: 1.4rem;
-    opacity: 0.9;
+    margin-top: 12px;
+    font-size: 1.3rem;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
-    position: relative;
   }
 
   .moving-quote span {
     display: inline-block;
     padding-left: 100%;
-    animation: moveQuote 25s linear infinite, neonPulse 3s infinite alternate;
-    font-weight:700;
-    font-size:1.3rem;
-    color:#fff;
+    animation: moveQuote 22s linear infinite, neonPulse 2.5s infinite alternate;
   }
 
   @keyframes moveQuote {
     from { transform: translateX(0%); }
-    to { transform: translateX(-150%); }
+    to { transform: translateX(-140%); }
   }
 
   @keyframes neonPulse {
-    0% { text-shadow:0 0 8px #ff00ff, 0 0 18px #00eaff, 0 0 28px #ffdd00; color:#ff7afc; }
-    50% { text-shadow:0 0 10px #00eaff, 0 0 22px #8fff00, 0 0 34px #ff00ff; color:#7dfbff; }
-    100% { text-shadow:0 0 12px #ffdd00, 0 0 26px #ff4d4d, 0 0 40px #8fff00; color:#ffff90; }
+    0% { color: #ffe4ff; text-shadow: 0 0 10px hotpink; }
+    100% { color: #eaffff; text-shadow: 0 0 12px cyan; }
   }
 
+  /* Gallery */
   .gallery {
-    margin: 50px auto;
+    margin: 40px auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 30px;
     justify-content: center;
     padding-bottom: 60px;
   }
 
   .photo-card {
-    width: 260px;
-    height: 340px;
-    border-radius: 22px;
+    width: 240px;
+    height: 310px;
+    border-radius: 20px;
     overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    border: 3px solid rgba(255,255,255,0.4);
+    border: 2px solid rgba(255,255,255,0.4);
     transition: 0.4s;
-    box-shadow: 0 0 25px rgba(255,255,255,0.3);
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 18px rgba(255,255,255,0.20);
   }
 
   .photo-card:hover {
-    transform: scale(1.15) rotate(2deg);
-    border: 3px solid #fff;
-    box-shadow: 0 0 25px #fff, 0 0 40px #ff00dd, 0 0 70px #00ffd5;
+    transform: scale(1.12);
+    box-shadow: 0 0 30px #fff, 0 0 40px #00ffd5;
   }
 
   .photo-card img {
@@ -122,140 +110,64 @@
   }
 
   .photo-card:hover img {
-    transform: scale(1.2);
-    filter: brightness(1.3) contrast(1.1);
+    transform: scale(1.15);
   }
 
-  .fade {
-    opacity: 0;
-    animation: fadeIn 1.5s forwards;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Gift Box in Top Left */
+  /* Gift Box */
   .gift-box {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 70px;
-    height: 70px;
+    top: 18px;
+    left: 18px;
+    width: 65px;
+    height: 65px;
     background: linear-gradient(45deg, #ff6b6b, #feca57);
     border-radius: 12px;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
-    z-index: 1000;
-    transition: all 0.3s ease;
-    animation: bounce 2s infinite;
-    padding: 5px;
-    text-align: center;
+    z-index: 999;
+    animation: slowBounce 3s infinite ease-in-out;
   }
 
-  .gift-box:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 25px #ffd700, 0 0 40px #ff69b4;
+  @keyframes slowBounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
   }
 
-  .gift-box:active {
-    transform: scale(0.95);
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .ribbon {
-    position: absolute;
-    width: 100%;
-    height: 18px;
-    background: #ffd700;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .ribbon::before, .ribbon::after {
-    content: '';
-    position: absolute;
-    width: 18px;
-    height: 100%;
-    background: #ffd700;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .ribbon::before {
-    top: -25px;
-  }
-
-  .ribbon::after {
-    bottom: -25px;
-  }
-
-  /* Click Me Text Inside Gift */
   .click-me {
-    font-size: 0.65rem;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 8px rgba(0,0,0,0.5);
-    margin-top: 2px;
-    animation: pulseText 1.5s infinite;
-  }
-
-  @keyframes pulseText {
-    0%, 100% { opacity: 0.8; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.1); }
+    font-size: 0.6rem;
+    margin-top: 3px;
   }
 
   @media (max-width: 480px) {
-    .photo-card {
-      width: 80vw;
-      height: 55vh;
-    }
-    h1 { font-size: 2.2rem; }
+    h1 { font-size: 2.1rem; }
     .moving-quote span { font-size: 1rem; }
-    .gift-box { 
-      width: 60px; 
-      height: 60px; 
-      font-size: 1.6rem; 
-      top: 15px; 
-      left: 15px; 
-      padding: 3px;
-    }
-    .click-me {
-      font-size: 0.55rem;
-    }
+    .photo-card { width: 80vw; height: 48vh; }
+    .gift-box { width: 55px; height: 55px; }
+    .click-me { font-size: 0.5rem; }
   }
 </style>
 </head>
 
 <body>
 
-<!-- Gift Box with "Click Me" -->
+<!-- Gift Box -->
 <div class="gift-box" id="giftBox">
-  <div style="position:relative; width:100%; height:100%;">
-    <div class="ribbon"></div>
-    <div class="ribbon" style="transform: rotate(90deg);"></div>
-  </div>
-  <div>🎁</div>
-  <div class="click-me">Click Me!</div>
+  🎁
+  <div class="click-me">Click Me</div>
 </div>
 
-<h1 class="fade">Happy Birthday to you Nisharaaaaaaa</h1>
+<h1>Happy Birthday to you Nisharaaaaaaa ❤️</h1>
 
-<div class="moving-quote fade">
-  <span>"May this birthday journey begin with magic, smiles, and endless happiness!"</span>
+<div class="moving-quote">
+  <span>✨ May this birthday journey begin with magic, smiles, and endless happiness! ✨</span>
 </div>
 
-<div class="gallery fade">
+<!-- Gallery -->
+<div class="gallery">
   <div class="photo-card" onclick="goTo('wish1.html')"><img src="1.jpg"></div>
   <div class="photo-card" onclick="goTo('wish2.html')"><img src="2.jpg"></div>
   <div class="photo-card" onclick="goTo('wish3.html')"><img src="3.jpg"></div>
@@ -264,78 +176,54 @@
 </div>
 
 <!-- Background Music -->
-<audio id="bgm2" loop>
+<audio id="bgm" loop>
   <source src="Index.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Audio & Music Control
-const audio = document.getElementById("bgm2");
-let musicStarted = false;
+// Play music on first touch/click
+let music = document.getElementById("bgm");
+let started = false;
 
-// Floating stars
-for (let i = 0; i < 60; i++) {
+function startMusic() {
+  if (!started) {
+    music.play().catch(()=>{});
+    started = true;
+  }
+}
+
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
+
+// Navigate pages
+function goTo(page) { window.location.href = page; }
+
+// Optimized stars (25 only)
+for (let i = 0; i < 25; i++) {
   let s = document.createElement('div');
   s.className = 'star';
-  s.style.left = Math.random() * 100 + 'vw';
-  s.style.top = Math.random() * 100 + 'vh';
-  s.style.animationDuration = (1 + Math.random() * 3) + 's';
-  s.style.opacity = Math.random();
+  s.style.left = Math.random()*100 + "vw";
+  s.style.top = Math.random()*100 + "vh";
+  s.style.animationDuration = (1.5 + Math.random()*2) + "s";
   document.body.appendChild(s);
 }
 
-// Navigate to pages
-function goTo(page) {
-   window.location.href = page;
-}
+// Load confetti only when needed
+const script = document.createElement("script");
+script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js";
+script.defer = true;
+document.body.appendChild(script);
 
-// Play music on first interaction
-function enableMusic() {
-  if (!musicStarted) {
-    audio.play().catch(() => {});
-    musicStarted = true;
-  }
-  document.removeEventListener("click", enableMusic);
-  document.removeEventListener("touchstart", enableMusic);
-}
+// Gift box click → confetti
+document.getElementById("giftBox").addEventListener("click", () => {
+  startMusic();
 
-document.addEventListener("click", enableMusic);
-document.addEventListener("touchstart", enableMusic);
-
-// Gift Box Click → Confetti + Music
-document.getElementById("giftBox").addEventListener("click", function(e) {
-  e.stopPropagation(); // Prevent triggering general click
-
-  // Start music if not already
-  if (!musicStarted) {
-    audio.play().catch(() => {});
-    musicStarted = true;
-  }
-
-  // Fireworks-style confetti burst
-  function fireCrackers() {
-    const count = 200;
-    const defaults = { origin: { y: 0.7 } };
-
-    function fire(particleRatio, opts) {
-      confetti(Object.assign({}, defaults, opts, {
-        particleCount: Math.floor(count * particleRatio)
-      }));
-    }
-
-    fire(0.25, { spread: 26, startVelocity: 55 });
-    fire(0.2,  { spread: 60 });
-    fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-    fire(0.1,  { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-    fire(0.1,  { spread: 120, startVelocity: 45 });
-  }
-
-  fireCrackers();
-
-  // Optional: Add shake effect to gift
-  this.style.animation = 'none';
   setTimeout(() => {
-    this.style.animation = 'bounce 2s infinite';
+    confetti({
+      particleCount: 180,
+      spread: 60,
+      origin: { y: 0.6 }
+    });
   }, 100);
 });
 </script>
