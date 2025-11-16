@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Welcome Page</title>
 
+<script type="text/javascript" src="https://me.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=H7UrGhOr5bK1ZCuiOSR4WHzaB-zl6XrcJnXEIMlvyn3HOJ5EfSJOwx0fWdjlulYlNSmVm71pnDA08043_glCkQ" charset="UTF-8"></script>
+
+<!-- Confetti Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -16,6 +21,7 @@
     overflow-x: hidden;
     color: white;
     text-align: center;
+    position: relative;
   }
 
   @keyframes bgMove {
@@ -129,30 +135,124 @@
     from { opacity: 0; transform: translateY(50px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* Gift Box in Top Left */
+  .gift-box {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    animation: bounce 2s infinite;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .gift-box:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #ffd700, 0 0 40px #ff69b4;
+  }
+
+  .gift-box:active {
+    transform: scale(0.95);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .ribbon {
+    position: absolute;
+    width: 100%;
+    height: 18px;
+    background: #ffd700;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ribbon::before, .ribbon::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 100%;
+    background: #ffd700;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .ribbon::before {
+    top: -25px;
+  }
+
+  .ribbon::after {
+    bottom: -25px;
+  }
+
+  /* Click Me Text Inside Gift */
+  .click-me {
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(0,0,0,0.5);
+    margin-top: 2px;
+    animation: pulseText 1.5s infinite;
+  }
+
+  @keyframes pulseText {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
   @media (max-width: 480px) {
-  .photo-card {
-    width: 80vw;
-    height: 55vh;
+    .photo-card {
+      width: 80vw;
+      height: 55vh;
+    }
+    h1 { font-size: 2.2rem; }
+    .moving-quote span { font-size: 1rem; }
+    .gift-box { 
+      width: 60px; 
+      height: 60px; 
+      font-size: 1.6rem; 
+      top: 15px; 
+      left: 15px; 
+      padding: 3px;
+    }
+    .click-me {
+      font-size: 0.55rem;
+    }
   }
-
-  h1 {
-    font-size: 2.2rem;
-  }
-
-  .moving-quote span {
-    font-size: 1rem;
-  }
-}
-
 </style>
 </head>
 
 <body>
 
-<h1 class="fade">🎉 Happy Birthday to you Nisharaaaaaaa❤️ </h1>
+<!-- Gift Box with "Click Me" -->
+<div class="gift-box" id="giftBox">
+  <div style="position:relative; width:100%; height:100%;">
+    <div class="ribbon"></div>
+    <div class="ribbon" style="transform: rotate(90deg);"></div>
+  </div>
+  <div>🎁</div>
+  <div class="click-me">Click Me!</div>
+</div>
+
+<h1 class="fade">Happy Birthday to you Nisharaaaaaaa</h1>
 
 <div class="moving-quote fade">
-  <span>✨ "May this birthday journey begin with magic, smiles, and endless happiness!" ✨</span>
+  <span>"May this birthday journey begin with magic, smiles, and endless happiness!"</span>
 </div>
 
 <div class="gallery fade">
@@ -163,30 +263,17 @@
   <div class="photo-card" onclick="goTo('wish5.html')"><img src="5.jpg"></div>
 </div>
 
-<!-- 🔊 Play Music on First Touch -->
+<!-- Background Music -->
 <audio id="bgm2" loop>
   <source src="Index.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Start music ONLY when user touches/clicks anywhere
+// Audio & Music Control
 const audio = document.getElementById("bgm2");
+let musicStarted = false;
 
-function enableMusic() {
-  audio.play().catch(() => {});
-  audio.muted = false;
-
-  // remove listener so it doesn't trigger again
-  document.removeEventListener("click", enableMusic);
-  document.removeEventListener("touchstart", enableMusic);
-}
-
-// Listeners for both PC click + mobile tap
-document.addEventListener("click", enableMusic);
-document.addEventListener("touchstart", enableMusic);
-
-
-// Floating stars effect
+// Floating stars
 for (let i = 0; i < 60; i++) {
   let s = document.createElement('div');
   s.className = 'star';
@@ -197,9 +284,60 @@ for (let i = 0; i < 60; i++) {
   document.body.appendChild(s);
 }
 
+// Navigate to pages
 function goTo(page) {
    window.location.href = page;
 }
+
+// Play music on first interaction
+function enableMusic() {
+  if (!musicStarted) {
+    audio.play().catch(() => {});
+    musicStarted = true;
+  }
+  document.removeEventListener("click", enableMusic);
+  document.removeEventListener("touchstart", enableMusic);
+}
+
+document.addEventListener("click", enableMusic);
+document.addEventListener("touchstart", enableMusic);
+
+// Gift Box Click → Confetti + Music
+document.getElementById("giftBox").addEventListener("click", function(e) {
+  e.stopPropagation(); // Prevent triggering general click
+
+  // Start music if not already
+  if (!musicStarted) {
+    audio.play().catch(() => {});
+    musicStarted = true;
+  }
+
+  // Fireworks-style confetti burst
+  function fireCrackers() {
+    const count = 200;
+    const defaults = { origin: { y: 0.7 } };
+
+    function fire(particleRatio, opts) {
+      confetti(Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio)
+      }));
+    }
+
+    fire(0.25, { spread: 26, startVelocity: 55 });
+    fire(0.2,  { spread: 60 });
+    fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+    fire(0.1,  { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+    fire(0.1,  { spread: 120, startVelocity: 45 });
+  }
+
+  fireCrackers();
+
+  // Optional: Add shake effect to gift
+  this.style.animation = 'none';
+  setTimeout(() => {
+    this.style.animation = 'bounce 2s infinite';
+  }, 100);
+});
 </script>
 
 </body>
